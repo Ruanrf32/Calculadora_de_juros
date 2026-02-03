@@ -1,0 +1,105 @@
+package exercicios_de_fixacao;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
+public class Teste_calculadora_de_juros {
+
+	public static void main(String[] args) {
+		
+		Scanner sc = new Scanner(System.in);
+		
+		//This block adds all taxes given by the user to an array
+		List <String> lista_nomes_taxas = new ArrayList<>();
+		List <Double> lista_valor_taxas = new ArrayList<>();
+		
+		//This block asks for the number of values to be informed and the number of months equivalent to the interest
+		System.out.print("Quantas taxas serao informadas? ");
+		int n_taxas = sc.nextInt();
+		sc.nextLine();
+		System.out.println();
+		System.out.print("Os juros adicionados serão equivalentes a quantos meses? ");
+		int n_meses = sc.nextInt();
+		sc.nextLine();
+		
+		for (int i = 0; i < n_taxas; i++) {
+			//This block iterates through the list lista_nomes_taxas adding the titles of the values to be informed
+			System.out.println();
+			System.out.print("Insira a taxa: ");
+			String taxa = sc.nextLine();
+			lista_nomes_taxas.add(taxa);
+			//This block iterates through the list lista_valor_taxas adding the values of said titles
+			System.out.print("Insira o valor da taxa: ");
+			Double valor_taxa = sc.nextDouble();
+			lista_valor_taxas.add(valor_taxa);
+			sc.nextLine();
+		}
+		//This block calculates the sum of the values
+		double soma_taxas = 0;
+		
+		for (int i = 0; i < n_taxas; i++) {
+			soma_taxas += lista_valor_taxas.get(i);
+		}
+		
+		String separador = "-";
+		System.out.println();
+		System.out.println(separador.repeat(100));
+		
+		//This block prints all individual values and the sum of them 
+		System.out.println();
+		System.out.println("Valores informados: ");
+		
+		for (int i = 0; i < n_taxas; i++) {
+			System.out.println();
+			System.out.printf(lista_nomes_taxas.get(i) + ": R$ %.2f", lista_valor_taxas.get(i));
+		}
+		
+		System.out.println();
+		System.out.println();
+		System.out.printf("Total: R$ %.2f", soma_taxas);
+		System.out.println();
+		
+		System.out.println();
+		System.out.println(separador.repeat(100));
+		
+		//This block calculates the interests added to the final value
+		List <Double> juros_individuais = new ArrayList<>(n_meses);
+		
+		double soma_juros = 0;
+		
+		for (int i = 0; i < n_meses; i++) {
+			juros_individuais.add(soma_taxas * 0.1);
+			soma_taxas += (soma_taxas * 0.1);
+			soma_juros += juros_individuais.get(i);
+		}
+		
+		//This block prints each individual interest value and the sum of them
+		System.out.println();
+		System.out.println("Juros individuais:");
+		System.out.println();
+		for (int i = 0; i < n_meses; i++) {
+			System.out.printf("Mês %s: ", (i + 1)); 
+			System.out.printf("R$ %.2f", juros_individuais.get(i));
+			System.out.println();
+		}
+		
+		System.out.println();
+		System.out.printf("Juros somados: R$ %.2f", soma_juros);
+		System.out.println();
+		
+		System.out.println();
+		System.out.println(separador.repeat(100));
+		
+		//This block prints the sum of the values informed plus the interests added to them
+		System.out.println();
+		System.out.printf("Total: R$ %.2f", soma_taxas);
+		System.out.println();
+		System.out.println();
+		
+		sc.close();
+		
+	}
+
+}
+
